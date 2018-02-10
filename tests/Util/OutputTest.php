@@ -5,6 +5,9 @@ namespace League\CLImate\Tests\Util;
 use League\CLImate\Exceptions\InvalidArgumentException;
 use League\CLImate\Tests\TestBase;
 use League\CLImate\Util\Output;
+use League\CLImate\Util\Writer\Buffer;
+use League\CLImate\Util\Writer\StdErr;
+use League\CLImate\Util\Writer\StdOut;
 use Mockery;
 use function get_class;
 
@@ -13,7 +16,7 @@ class OutputTest extends TestBase
     /** @test */
     public function it_can_output_content()
     {
-        $out = Mockery::mock('League\CLImate\Util\Writer\StdOut');
+        $out = Mockery::mock(StdOut::class);
         $out->shouldReceive('write')->once()->with("Oh, hey there.\n");
 
         $output = new Output;
@@ -26,7 +29,7 @@ class OutputTest extends TestBase
     /** @test */
     public function it_can_output_content_without_a_new_line()
     {
-        $out = Mockery::mock('League\CLImate\Util\Writer\StdOut');
+        $out = Mockery::mock(StdOut::class);
         $out->shouldReceive('write')->once()->with("Oh, hey there.");
 
         $output = new Output;
@@ -39,7 +42,7 @@ class OutputTest extends TestBase
     /** @test */
     public function it_can_default_to_a_writer()
     {
-        $error = Mockery::mock('League\CLImate\Util\Writer\StdErr');
+        $error = Mockery::mock(StdErr::class);
         $error->shouldReceive('write')->once()->with("Oh, hey there.");
 
         $output = new Output;
@@ -53,10 +56,10 @@ class OutputTest extends TestBase
     /** @test */
     public function it_can_default_to_multiple_writers()
     {
-        $out = Mockery::mock('League\CLImate\Util\Writer\StdOut');
+        $out = Mockery::mock(StdOut::class);
         $out->shouldReceive('write')->once()->with("Oh, hey there.");
 
-        $error = Mockery::mock('League\CLImate\Util\Writer\StdErr');
+        $error = Mockery::mock(StdErr::class);
         $error->shouldReceive('write')->once()->with("Oh, hey there.");
 
         $output = new Output;
@@ -71,10 +74,10 @@ class OutputTest extends TestBase
     /** @test */
     public function it_can_add_a_default()
     {
-        $out = Mockery::mock('League\CLImate\Util\Writer\StdOut');
+        $out = Mockery::mock(StdOut::class);
         $out->shouldReceive('write')->once()->with("Oh, hey there.");
 
-        $error = Mockery::mock('League\CLImate\Util\Writer\StdErr');
+        $error = Mockery::mock(StdErr::class);
         $error->shouldReceive('write')->once()->with("Oh, hey there.");
 
         $output = new Output;
@@ -90,10 +93,10 @@ class OutputTest extends TestBase
     /** @test */
     public function it_can_handle_multiple_writers_for_one_key()
     {
-        $out = Mockery::mock('League\CLImate\Util\Writer\StdOut');
+        $out = Mockery::mock(StdOut::class);
         $out->shouldReceive('write')->once()->with('Oh, hey there.');
 
-        $error = Mockery::mock('League\CLImate\Util\Writer\StdErr');
+        $error = Mockery::mock(StdErr::class);
         $error->shouldReceive('write')->once()->with('Oh, hey there.');
 
         $output = new Output;
@@ -107,10 +110,10 @@ class OutputTest extends TestBase
     /** @test */
     public function it_can_take_existing_writer_keys_and_resolve_them()
     {
-        $out = Mockery::mock('League\CLImate\Util\Writer\StdOut');
+        $out = Mockery::mock(StdOut::class);
         $out->shouldReceive('write')->once()->with('Oh, hey there.');
 
-        $error = Mockery::mock('League\CLImate\Util\Writer\StdErr');
+        $error = Mockery::mock(StdErr::class);
         $error->shouldReceive('write')->once()->with('Oh, hey there.');
 
         $output = new Output;
@@ -126,9 +129,9 @@ class OutputTest extends TestBase
     /** @test */
     public function it_can_get_the_available_writers()
     {
-        $out    = Mockery::mock('League\CLImate\Util\Writer\StdOut');
-        $error  = Mockery::mock('League\CLImate\Util\Writer\StdErr');
-        $buffer = Mockery::mock('League\CLImate\Util\Writer\Buffer');
+        $out    = Mockery::mock(StdOut::class);
+        $error  = Mockery::mock(StdErr::class);
+        $buffer = Mockery::mock(Buffer::class);
 
         $output = new Output;
 
@@ -163,7 +166,7 @@ class OutputTest extends TestBase
     /** @test */
     public function it_will_yell_if_writer_does_not_implement_writer_interface()
     {
-        $out    = Mockery::mock('League\CLImate\Util\Writer\Wat');
+        $out    = Mockery::mock();
         $output = new Output;
 
         $this->expectException(InvalidArgumentException::class);
@@ -186,10 +189,10 @@ class OutputTest extends TestBase
     /** @test */
     public function it_can_write_to_a_non_default_writer_once()
     {
-        $out = Mockery::mock('League\CLImate\Util\Writer\StdOut');
+        $out = Mockery::mock(StdOut::class);
         $out->shouldReceive('write')->once()->with('Second time.');
 
-        $error = Mockery::mock('League\CLImate\Util\Writer\StdErr');
+        $error = Mockery::mock(StdErr::class);
         $error->shouldReceive('write')->once()->with('First time.');
 
         $output = new Output;
@@ -206,10 +209,10 @@ class OutputTest extends TestBase
     /** @test */
     public function it_will_persist_writer_if_told_to()
     {
-        $out = Mockery::mock('League\CLImate\Util\Writer\StdOut');
+        $out = Mockery::mock(StdOut::class);
         $out->shouldReceive('write')->once()->with('Second time.');
 
-        $error = Mockery::mock('League\CLImate\Util\Writer\StdErr');
+        $error = Mockery::mock(StdErr::class);
         $error->shouldReceive('write')->times(3)->with('First time.');
 
         $output = new Output;
@@ -230,7 +233,7 @@ class OutputTest extends TestBase
     /** @test */
     public function it_can_retrieve_a_writer()
     {
-        $buffer = Mockery::mock('League\CLImate\Util\Writer\Buffer');
+        $buffer = Mockery::mock(Buffer::class);
         $buffer->shouldReceive('write')->once()->with('Oh, hey there.');
         $buffer->shouldReceive('get')->once()->andReturn('Oh, hey there.');
 
