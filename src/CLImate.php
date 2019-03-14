@@ -58,6 +58,7 @@ use League\CLImate\Util\UtilFactory;
  * @method CLImate whisper(string $str = null)
  * @method CLImate shout(string $str = null)
  * @method CLImate error(string $str = null)
+ * @method CLImate emoji(string $code, string $str = '')
  *
  * @method mixed out(string $str)
  * @method mixed inline(string $str)
