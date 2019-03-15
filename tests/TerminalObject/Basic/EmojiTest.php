@@ -7,7 +7,7 @@ use League\CLImate\Tests\TestBase;
 
 class EmojiTest extends TestBase
 {
-    public function test_we_display_emoji()
+    public function it_will_display_emojis()
     {
         $this->output->shouldReceive('emoji')->andReturn(true);
 
