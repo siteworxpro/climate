@@ -8,7 +8,7 @@ namespace League\CLImate\TerminalObject\Basic;
  */
 class Emoji extends BasicTerminalObject
 {
-    const SPACING = 5;
+    const DESIRED_LENGTH = 8;
 
     const KEYCAP_NUMBER_SIGN = "\u{0023}";
     const KEYCAP_ASTERISK = "\u{002A}";
@@ -1316,7 +1316,7 @@ class Emoji extends BasicTerminalObject
     public function result()
     {
         $emojiLength = strlen($this->code);
-        $desiredLength = abs(self::SPACING - $emojiLength);
-        return $this->code . str_repeat( ' ', $desiredLength) . $this->content;
+        $padding = self::DESIRED_LENGTH - $emojiLength;
+        return "  " . $this->code . str_repeat( "\t", $padding / 3) . $this->content;
     }
 }
