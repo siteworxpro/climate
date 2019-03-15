@@ -1031,7 +1031,7 @@ class Emoji extends BasicTerminalObject
      */
     private $content;
 
-    public function __construct($code, $content = '')
+    public function __construct($content, $code = self::HEAVY_CHECK_MARK)
     {
         $this->code = $code;
         $this->content = $content;
@@ -1041,6 +1041,6 @@ class Emoji extends BasicTerminalObject
     {
         $emojiLength = strlen($this->code);
         $padding = self::DESIRED_LENGTH - $emojiLength;
-        return "  " . $this->code . str_repeat( "\t", $padding / 3) . $this->content;
+        return '  ' . $this->code . str_repeat( "\t", $padding / 3) . $this->content;
     }
 }

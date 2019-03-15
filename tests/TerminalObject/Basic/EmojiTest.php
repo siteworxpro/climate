@@ -16,6 +16,6 @@ class EmojiTest extends TestBase
         $this->shouldWrite("\e[m{$emojiTest}\e[0m");
         $this->shouldHavePersisted();
 
-        $this->cli->emoji(Emoji::TIMER_CLOCK, 'Reticulating splines...');
+        $this->cli->emoji('Reticulating splines...', Emoji::TIMER_CLOCK);
     }
 }
