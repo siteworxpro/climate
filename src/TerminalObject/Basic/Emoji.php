@@ -1039,8 +1039,6 @@ class Emoji extends BasicTerminalObject
 
     public function result()
     {
-        $emojiLength = strlen($this->code);
-        $padding = self::DESIRED_LENGTH - $emojiLength;
-        return '  ' . $this->code . str_repeat( "\t", $padding / 3) . $this->content;
+        return '  ' . $this->code . "\t" . $this->content;
     }
 }
