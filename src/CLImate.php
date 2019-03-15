@@ -5,6 +5,7 @@ namespace League\CLImate;
 use League\CLImate\Argument\Manager as ArgumentManager;
 use League\CLImate\Decorator\Style;
 use League\CLImate\Settings\Manager as SettingsManager;
+use League\CLImate\TerminalObject\Basic\Emoji;
 use League\CLImate\TerminalObject\Dynamic\Spinner;
 use League\CLImate\TerminalObject\Router\Router;
 use League\CLImate\Util\Helper;
@@ -58,7 +59,7 @@ use League\CLImate\Util\UtilFactory;
  * @method CLImate whisper(string $str = null)
  * @method CLImate shout(string $str = null)
  * @method CLImate error(string $str = null)
- * @method CLImate emoji(string $code, string $str = '')
+ * @method CLImate emoji(string $content, string $code = Emoji::HEAVY_CHECK_MARK)
  *
  * @method mixed out(string $str)
  * @method mixed inline(string $str)
