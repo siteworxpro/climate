@@ -8,8 +8,6 @@ namespace League\CLImate\TerminalObject\Basic;
  */
 class Emoji extends BasicTerminalObject
 {
-    const DESIRED_LENGTH = 8;
-
     const MAHJONG_TILE_RED_DRAGON = "\u{1F004}";
     const PLAYING_CARD_BLACK_JOKER = "\u{1F0CF}";
     const NEGATIVE_SQUARED_LATIN_CAPITAL_LETTER_A = "\u{1F170}";
