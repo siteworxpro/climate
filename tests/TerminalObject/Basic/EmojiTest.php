@@ -2,6 +2,7 @@
 
 namespace League\CLImate\Tests\TerminalObject\Basic;
 
+use League\CLImate\Exceptions\InvalidArgumentException;
 use League\CLImate\TerminalObject\Basic\Emoji;
 use League\CLImate\Tests\TestBase;
 
@@ -17,5 +18,12 @@ class EmojiTest extends TestBase
         $this->shouldHavePersisted();
 
         $this->cli->emoji('Reticulating splines...', Emoji::TIMER_CLOCK);
+    }
+
+    public function it_will_throw_exception()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $this->cli->emoji('Reticulating splines...', 'Invalid Emoji!');
     }
 }
