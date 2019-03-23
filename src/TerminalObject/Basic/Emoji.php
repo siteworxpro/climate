@@ -2,6 +2,9 @@
 
 namespace League\CLImate\TerminalObject\Basic;
 
+use League\CLImate\Exceptions\InvalidArgumentException;
+use ReflectionClass;
+
 /**
  * Class Emoji
  * @package League\CLImate\TerminalObject\Basic
@@ -1029,8 +1032,20 @@ class Emoji extends BasicTerminalObject
      */
     private $content;
 
+    /**
+     * Emoji constructor.
+     * @param $content
+     * @param string $code
+     * @throws \ReflectionException
+     */
     public function __construct($content, $code = self::HEAVY_CHECK_MARK)
     {
+        $reflection = new ReflectionClass(Emoji::class);
+
+        if (!\in_array($code, $reflection->getConstants())) {
+            throw new InvalidArgumentException($code . ' is not a valid emoji');
+        }
+
         $this->code = $code;
         $this->content = $content;
     }
