@@ -2,7 +2,7 @@
 
 namespace League\CLImate\Tests;
 
-require_once __DIR__ . '/../vendor/mikey179/vfsStream/src/main/php/org/bovigo/vfs/vfsStream.php';
+require_once __DIR__ . '/../vendor/mikey179/vfsstream/src/main/php/org/bovigo/vfs/vfsStream.php';
 require_once 'FileGlobalMock.php';
 
 use League\CLImate\Exceptions\RuntimeException;
@@ -13,7 +13,7 @@ class FileTest extends TestBase
 {
     protected $file;
 
-    public function setUp()
+    public function setUp(): void
     {
         $root       = vfsStream::setup();
         $this->file = vfsStream::newFile('log')->at($root);
@@ -40,7 +40,7 @@ class FileTest extends TestBase
 
         $output->write("Oh, you're still here.");
 
-        $this->assertSame("Oh, you're still here.\n", $this->file->getContent());
+        $this->assertSame("Oh, you're still here." . \PHP_EOL, $this->file->getContent());
     }
 
     /** @test */
@@ -54,7 +54,7 @@ class FileTest extends TestBase
 
         $output->write("Oh, you're still here.");
 
-        $this->assertSame("Oh, you're still here.\n", $this->file->getContent());
+        $this->assertSame("Oh, you're still here." . \PHP_EOL, $this->file->getContent());
     }
 
     /** @test */
@@ -79,10 +79,13 @@ class FileTest extends TestBase
 
         $output->write("Oh, you're still here.");
 
-        $this->assertSame("Oh, you're still here.\n", $this->file->getContent());
+        $this->assertSame("Oh, you're still here." . \PHP_EOL, $this->file->getContent());
     }
 
-    /** @test */
+    /**
+     * @codeCoverageIgnore
+     * @doesNotPerformAssertions
+     */
     public function it_can_write_to_a_gzipped_file()
     {
         // $file = $this->getFileMock($this->file->url());
@@ -104,7 +107,7 @@ class FileTest extends TestBase
 
         // $output->write("Oh, you're still here.");
 
-        // $this->assertSame("Oh, you're still here.\n", $this->file->getContent());
+        // $this->assertSame("Oh, you're still here." . \PHP_EOL, $this->file->getContent());
     }
 
     /** @test */
